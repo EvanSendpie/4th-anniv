@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Happy4th Anniversary</title>
+  <meta name="description"
+    content="A special interactive anniversary surprise crafted with love for our 4th year together." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING PARTICLES (background ambience)
+  ═══════════════════════════════════════════ -->
+  <div id="particles-bg" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING MUSIC CONTROLLER
+  ═══════════════════════════════════════════ -->
+  <div id="music-controller" class="music-controller hidden" aria-label="Music controller">
+    <button id="btn-music-toggle" class="music-btn" type="button" title="Toggle music" aria-pressed="false">
+      <span class="music-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18V5l12-2v13M9 18c0 1.7-1.6 3-3.5 3S2 20.7 2 19s1.6-3 3.5-3S9 16.3 9 18Zm12-2c0 1.7-1.6 3-3.5 3S14 17.7 14 16s1.6-3 3.5-3 3.5 1.3 3.5 3Z"/></svg></span>
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CONFETTI CANVAS
+  ═══════════════════════════════════════════ -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SECTION 1 · PASSCODE GATE
+  ══════════════════════════════════════════════════════════ -->
+  <section id="section-passcode" class="gate-overlay active">
+    <div class="gate-card">
+      <div class="gate-lock-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="9" y="21" width="30" height="22" rx="4"/><path d="M16 21v-7a8 8 0 0 1 16 0v7"/><circle cx="24" cy="31" r="2"/><path d="M24 33v4"/></svg></div>
+      <h1 class="gate-title">Buka Kunci Kejutanmu~</h1>
+      <p class="gate-subtitle">Masukkan kode rahasia kita untuk mulai </p>
+
+      <!-- PIN display -->
+      <div id="pin-display" class="pin-display" aria-label="PIN input display">
+        <span class="pin-dot" data-index="0"></span>
+        <span class="pin-dot" data-index="1"></span>
+        <span class="pin-dot" data-index="2"></span>
+        <span class="pin-dot" data-index="3"></span>
+        <span class="pin-dot" data-index="4"></span>
+        <span class="pin-dot" data-index="5"></span>
+      </div>
+
+      <!-- Error / hint message -->
+      <p id="gate-message" class="gate-message" aria-live="polite"></p>
+
+      <!-- Keypad -->
+      <div id="keypad" class="keypad" role="group" aria-label="Numeric keypad">
+        <button class="key-btn" type="button" id="key-1" data-digit="1" aria-label="1">1</button>
+        <button class="key-btn" type="button" id="key-2" data-digit="2" aria-label="2">2</button>
+        <button class="key-btn" type="button" id="key-3" data-digit="3" aria-label="3">3</button>
+        <button class="key-btn" type="button" id="key-4" data-digit="4" aria-label="4">4</button>
+        <button class="key-btn" type="button" id="key-5" data-digit="5" aria-label="5">5</button>
+        <button class="key-btn" type="button" id="key-6" data-digit="6" aria-label="6">6</button>
+        <button class="key-btn" type="button" id="key-7" data-digit="7" aria-label="7">7</button>
+        <button class="key-btn" type="button" id="key-8" data-digit="8" aria-label="8">8</button>
+        <button class="key-btn" type="button" id="key-9" data-digit="9" aria-label="9">9</button>
+        <button class="key-btn key-hint" type="button" id="key-hint" aria-label="Petunjuk">?</button>
+        <button class="key-btn" type="button" id="key-0" data-digit="0" aria-label="0">0</button>
+        <button class="key-btn key-delete" type="button" id="key-delete" aria-label="Hapus angka terakhir">⌫</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT (hidden until passcode unlocked)
+  ══════════════════════════════════════════════════════════ -->
+  <main id="main-content" class="hidden">
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 2 · HERO & LIVE COUNTER
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-hero" class="section-hero">
+      <div class="hero-inner">
+        <div class="hero-badge">4th Anniversary</div>
+        <img class="hero-still-life" src="assets/anniversary-still-life.svg" alt="" width="600" height="380" />
+        <h1 id="hero-title" class="hero-title">Happy 4th Anniversary,<br /><span id="hero-partner-name"
+            class="hero-name-highlight">Sayang</span>! </h1>
+        <p id="hero-subtitle" class="hero-subtitle">Sudah 4 tahun kita bersama — dan setiap detiknya adalah keajaiban 
+        </p>
+
+        <!-- Love Counter -->
+        <div class="counter-box">
+          <div class="counter-label">Sudah bersama selama...</div>
+          <div class="counter-grid">
+            <div class="counter-unit">
+              <div id="counter-days" class="counter-value">0000</div>
+              <div class="counter-unit-label">hari</div>
+            </div>
+            <div class="counter-sep">:</div>
+            <div class="counter-unit">
+              <div id="counter-hours" class="counter-value">00</div>
+              <div class="counter-unit-label">jam</div>
+            </div>
+            <div class="counter-sep">:</div>
+            <div class="counter-unit">
+              <div id="counter-minutes" class="counter-value">00</div>
+              <div class="counter-unit-label">menit</div>
+            </div>
+            <div class="counter-sep">:</div>
+            <div class="counter-unit">
+              <div id="counter-seconds" class="counter-value">00</div>
+              <div class="counter-unit-label">detik</div>
+            </div>
+          </div>
+          <div class="counter-note">... penuh cinta & kenangan indah </div>
+        </div>
+
+        <a href="#section-storyline" class="hero-cta" id="btn-hero-cta">
+          Lihat perjalanan kita 
+        </a>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 3 · VERTICAL STORYLINE ROAD
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-storyline" class="section-storyline">
+      <div class="section-header">
+        <div class="section-pill"> Perjalanan Kita</div>
+        <h2 class="section-title">4 Tahun Penuh Cerita</h2>
+        <p class="section-desc">Scroll ke bawah untuk mengenang perjalanan indah kita bersama~</p>
+      </div>
+
+      <div class="storyline-road" id="storyline-road">
+        <!-- Chapters injected by JS -->
+      </div>
+
+      <div class="storyline-end">
+        <div class="storyline-end-badge" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="m24 3 5 14 14-5-8 12 10 10-15-2-6 13-5-14-14 5 8-12L3 14l15 2z"/></svg></div>
+        <p>Dan masih banyak bab indah yang menanti!</p>
+        <a class="cta-btn" href="#section-quiz" id="btn-to-quiz">Main Kuis Dulu Yuk! </a>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 4 · MEMORY QUIZ
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-quiz" class="section-quiz">
+      <div class="section-header">
+        <div class="section-pill"> Kuis Kenangan</div>
+        <h2 class="section-title">Seberapa Hapal Kamu?</h2>
+        <p class="section-desc">Jawab pertanyaan-pertanyaan manis tentang perjalanan kita! </p>
+      </div>
+
+      <div class="quiz-card" id="quiz-card">
+        <!-- Quiz progress -->
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar">
+            <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+          </div>
+          <span id="quiz-progress-text" class="quiz-progress-text">Pertanyaan 1 dari 4</span>
+        </div>
+
+        <!-- Question -->
+        <p id="quiz-question" class="quiz-question">Loading...</p>
+
+        <!-- Options grid -->
+        <div id="quiz-options" class="quiz-options" role="group" aria-label="Quiz answer options">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Feedback -->
+        <div id="quiz-feedback" class="quiz-feedback hidden" aria-live="polite"></div>
+
+        <!-- Next button -->
+        <button id="btn-quiz-next" class="quiz-next-btn hidden" type="button" aria-label="Pertanyaan berikutnya">
+          Lanjut 
+        </button>
+      </div>
+
+      <!-- Completion screen -->
+      <div id="quiz-complete" class="quiz-complete hidden">
+        <div class="quiz-complete-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="19"/><path d="m15 24 6 6 13-14"/></svg></div>
+        <h3 class="quiz-complete-title">Kamu Luar Biasa!</h3>
+        <p id="quiz-score-text" class="quiz-score-text">Skor: 4/4 — Kamu hapal semuanya!</p>
+        <a class="cta-btn" href="#section-game-hearts" id="btn-to-game">Main Game Sekarang! </a>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 5 · CATCH THE LOVE HEARTS GAME
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-game-hearts" class="section-game">
+      <div class="section-header">
+        <div class="section-pill"> Mini Game 1</div>
+        <h2 class="section-title">Tangkap Hati Cintamu! </h2>
+        <p class="section-desc">Gerakkan keranjang untuk menangkap hati yang berjatuhan!</p>
+      </div>
+
+      <div class="game-container" id="hearts-game-container">
+        <div class="game-hud">
+          <div class="game-score-display">
+            <span class="game-score-label">Hati Ditangkap:</span>
+            <span id="hearts-score" class="game-score-value">0</span>
+            <span class="game-score-label"> / </span>
+            <span id="hearts-target" class="game-score-value">15</span>
+          </div>
+          <div class="game-progress-bar-wrap">
+            <div id="hearts-progress" class="game-progress-fill"></div>
+          </div>
+        </div>
+
+        <div id="hearts-arena" class="hearts-arena" role="application" aria-label="Catch the hearts game area">
+          <!-- Falling items injected by JS -->
+          <div id="hearts-basket" class="hearts-basket" aria-label="Basket"><img src="assets/basket.png" alt="Keranjang" /></div>
+        </div>
+
+        <div class="game-controls">
+          <button id="btn-hearts-start" class="cta-btn" type="button" aria-label="Mulai game tangkap hati">Mulai Game</button>
+          <button id="btn-hearts-stop" class="stop-btn hidden" type="button" aria-label="Hentikan game">Stop</button>
+          <button id="btn-hearts-restart" class="outline-btn hidden" type="button" aria-label="Ulangi game">Ulangi</button>
+        </div>
+
+        <div id="hearts-victory" class="game-victory hidden">
+          <div class="game-victory-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="19"/><path d="m15 24 6 6 13-14"/></svg></div>
+          <h3>Kamu Berhasil!</h3>
+          <p>Semua hati cinta berhasil ditangkap! </p>
+          <a class="cta-btn" href="#section-game-puzzle" id="btn-to-puzzle">Game Berikutnya </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 6 · LOVE PHOTO PUZZLE
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-game-puzzle" class="section-game section-puzzle">
+      <div class="section-header">
+        <div class="section-pill"> Mini Game 2</div>
+        <h2 class="section-title">Susun Puzzle Kenangan! </h2>
+        <p class="section-desc">Klik tile yang bersebelahan dengan kotak kosong untuk menyusunnya!</p>
+      </div>
+
+      <div class="game-container" id="puzzle-game-container">
+        <div class="puzzle-layout">
+          <div class="puzzle-preview-wrap">
+            <p class="puzzle-preview-label">Preview </p>
+            <div id="puzzle-preview" class="puzzle-preview"></div>
+          </div>
+          <div class="puzzle-board-wrap">
+            <div id="puzzle-board" class="puzzle-board" role="grid" aria-label="Sliding photo puzzle grid">
+              <!-- 9 tiles injected by JS -->
+            </div>
+            <div class="puzzle-actions">
+              <button id="btn-puzzle-start" class="cta-btn" type="button">Mulai Puzzle</button>
+              <button id="btn-puzzle-reset" class="outline-btn hidden" type="button">Acak Ulang</button>
+              <button id="btn-puzzle-hint" class="outline-btn hidden" type="button">Lihat Petunjuk</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="puzzle-victory" class="game-victory hidden">
+          <div class="game-victory-icon" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="19"/><path d="m15 24 6 6 13-14"/></svg></div>
+          <h3>Puzzle Selesai!</h3>
+          <p>Foto kenangan kita tersusun sempurna! </p>
+          <a class="cta-btn" href="#section-finale" id="btn-to-finale">Buka Kejutan Terakhir </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────────────
+         SECTION 7 · GRAND FINALE — LOVE LETTER
+    ──────────────────────────────────────────────────────── -->
+    <section id="section-finale" class="section-finale">
+      <div class="section-header">
+        <div class="section-pill"> Surat Cinta</div>
+        <h2 class="section-title">Sebuah Surat Untukmu</h2>
+        <p class="section-desc">Klik amplop untuk membuka surat rahasiaku untukmu~ </p>
+      </div>
+
+      <div class="finale-inner">
+        <!-- Envelope -->
+        <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open the love letter envelope"
+          aria-expanded="false">
+          <div class="envelope-flap"></div>
+          <div class="envelope-body">
+            <div class="envelope-wax-seal" id="wax-seal"></div>
+            <p class="envelope-hint">Klik untuk membuka </p>
+          </div>
+        </div>
+
+        <!-- Love letter (hidden until envelope opened) -->
+        <div id="love-letter" class="love-letter hidden" aria-live="polite">
+          <div class="letter-paper">
+            <div class="letter-deco">  </div>
+            <div id="letter-body" class="letter-body">
+              <!-- Paragraphs injected by JS -->
+            </div>
+            <div class="letter-signature" id="letter-signature">
+              Dengan sepenuh cinta,<br />
+              <strong id="letter-sender-name">Kamu</strong> 
+            </div>
+          </div>
+
+          <!-- PROPOSAL -->
+          <div class="proposal-section" id="proposal-section">
+            <h3 class="proposal-question" id="proposal-question">
+              Will you stay with me for year 5 and forever? 
+            </h3>
+            <div class="proposal-buttons" id="proposal-buttons">
+              <button id="btn-yes" class="btn-yes" type="button" aria-label="Ya, aku akan selalu bersamamu">
+                YES! 
+              </button>
+              <button id="btn-no" class="btn-no" type="button" aria-label="Tombol tidak">
+                No...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main-content -->
+
+  <!-- YES celebration modal (viewport-centered floating modal) -->
+  <div id="yes-celebration" class="yes-celebration hidden" role="dialog" aria-modal="true" aria-label="Celebration">
+    <div class="celebration-card">
+      <div class="celebration-emoji">🥰</div>
+      <h2 class="celebration-title">Yay!! Aku Tahu Itu! ❤️</h2>
+      <p class="celebration-message" id="celebration-message">
+        Terima kasih sudah memilihku juga, sayang~ Aku mencintaimu selamanya! 💕
+      </p>
+      <p class="celebration-heart">💍💖✨</p>
+      <p class="celebration-hint">(Klik di mana saja untuk menutup)</p>
+    </div>
+  </div>
+
+  <button id="btn-scroll-top" class="scroll-top" type="button" aria-label="Kembali ke bagian atas" title="Kembali ke atas">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 14 6-6 6 6M12 8v12" /></svg>
+    <span>Ke atas</span>
+  </button>
+
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>

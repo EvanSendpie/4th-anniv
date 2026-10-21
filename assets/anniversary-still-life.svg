@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">An anniversary letter on warm paper</title>
+  <desc id="description">A folded letter, a small flower, and a handwritten date arranged on a warm editorial canvas.</desc>
+  <rect width="600" height="380" rx="12" fill="#efe9de"/>
+  <path d="M78 294c88-54 164-65 231-39 73 29 130 14 212-35v83H78v-9Z" fill="#faf9f5"/>
+  <g transform="rotate(-6 298 180)">
+    <rect x="177" y="54" width="260" height="262" rx="8" fill="#faf9f5" stroke="#181715" stroke-opacity=".08"/>
+    <path d="M208 110h132M208 130h178M208 150h158" stroke="#6c6a64" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>
+    <path d="M208 207c31-32 59-32 90 0s59 32 90 0" stroke="#cc785c" stroke-width="3" stroke-linecap="round"/>
+    <path d="M208 234h144" stroke="#6c6a64" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="383" cy="265" r="23" fill="#efe9de"/>
+    <path d="M373 265h20M383 255v20" stroke="#a9583e" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(414 40)">
+    <path d="M31 5c-3 31-4 53-5 77" stroke="#6c6a64" stroke-width="2" stroke-linecap="round"/>
+    <path d="M27 28C5 24 2 12 6 5c13 1 22 7 21 23Zm1 18c18-18 30-14 35-8-8 12-20 17-35 8Z" fill="#cc785c" fill-opacity=".78"/>
+    <path d="M8 80c11-7 26-7 39 0" stroke="#a9583e" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <circle cx="106" cy="91" r="3" fill="#cc785c"/>
+  <circle cx="484" cy="278" r="4" fill="#a9583e"/>
+  <path d="m121 237 4 9 10 1-7 6 2 10-9-5-9 5 2-10-7-6 10-1 4-9Z" fill="#cc785c" fill-opacity=".7"/>
+</svg>
