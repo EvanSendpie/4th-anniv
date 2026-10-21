@@ -472,10 +472,23 @@ const AnniversaryEngine = (() => {
   const gateSection   = document.getElementById('section-passcode');
   const mainContent   = document.getElementById('main-content');
   const pinDisplay    = document.getElementById('pin-display');
-  const pinDots       = pinDisplay.querySelectorAll('.pin-dot');
   const gateMessage   = document.getElementById('gate-message');
   const musicCtrl     = document.getElementById('music-controller');
   let isUnlocking = false;
+
+  const PASSCODE_LENGTH = String(CONFIG.passcode).length;
+
+  function renderPinDots() {
+    pinDisplay.innerHTML = '';
+    for (let i = 0; i < PASSCODE_LENGTH; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'pin-dot';
+      dot.dataset.index = i;
+      pinDisplay.appendChild(dot);
+    }
+  }
+  renderPinDots();
+  const pinDots = pinDisplay.querySelectorAll('.pin-dot');
 
   function updateDots(filled) {
     pinDots.forEach((dot, i) => dot.classList.toggle('filled', i < filled));
@@ -502,15 +515,16 @@ const AnniversaryEngine = (() => {
     setTimeout(() => {
       gateSection.classList.add('hidden');
       mainContent.classList.remove('hidden');
+      window.dispatchEvent(new Event('resize'));
     }, 700);
   }
 
   function processDelete() {
     if (isUnlocking) return;
-      AudioEngine.SFX.keyClick();
-      const result = AnniversaryEngine.deleteDigit();
-      if (result.action !== 'noop') updateDots(result.filled);
-      showMessage('');
+    AudioEngine.SFX.keyClick();
+    const result = AnniversaryEngine.deleteDigit();
+    if (result.action !== 'noop') updateDots(result.filled);
+    showMessage('');
   }
 
   function processDigit(digit) {
@@ -524,7 +538,7 @@ const AnniversaryEngine = (() => {
       showMessage('');
     } else if (result.action === 'unlock') {
       updateDots(PASSCODE_LENGTH);
-      showMessage('Benar Bubu! Selamat datang');
+      showMessage(`Benar ${CONFIG.partnerName}! Selamat datang`);
       setTimeout(unlock, 400);
     } else if (result.action === 'wrong') {
       AudioEngine.SFX.wrong();
@@ -534,15 +548,17 @@ const AnniversaryEngine = (() => {
     }
   }
 
-  const PASSCODE_LENGTH = String(CONFIG.passcode).length;
-
   document.getElementById('keypad').addEventListener('click', (e) => {
     const btn = e.target.closest('.key-btn');
     if (!btn) return;
 
     if (btn.id === 'key-hint') {
       AudioEngine.SFX.hint();
-      showMessage(CONFIG.hint);
+      if (gateMessage.textContent === CONFIG.hint) {
+        showMessage('');
+      } else {
+        showMessage(CONFIG.hint);
+      }
       return;
     }
     if (btn.id === 'key-delete') {
@@ -560,6 +576,10 @@ const AnniversaryEngine = (() => {
     } else if (e.key === 'Backspace' || e.key === 'Delete') {
       e.preventDefault();
       processDelete();
+    } else if (e.key === '?') {
+      e.preventDefault();
+      AudioEngine.SFX.hint();
+      showMessage(gateMessage.textContent === CONFIG.hint ? '' : CONFIG.hint);
     }
   });
 })();
@@ -705,11 +725,13 @@ const AnniversaryEngine = (() => {
   document.head.appendChild(tlStyle);
 
   function updateTimelineProgress() {
+    if (!road) return;
     const roadRect = road.getBoundingClientRect();
+    if (!roadRect.height) return;
     const viewportMid = window.innerHeight * 0.6;
     const scrolledInto = viewportMid - roadRect.top;
     const progress = Math.max(0, Math.min(1, scrolledInto / roadRect.height));
-    const lineHeight = progress * roadRect.height;
+    const lineHeight = Math.round(progress * roadRect.height);
     tlStyle.textContent = `.storyline-road::after { height: ${lineHeight}px; }`;
   }
 
@@ -931,7 +953,7 @@ const AnniversaryEngine = (() => {
     ConfettiEngine.burst();
     victoryEl.classList.remove('hidden');
     stopBtn.classList.add('hidden');
-    restartBtn.classList.add('hidden');
+    restartBtn.classList.remove('hidden');
     fallingItems.forEach(i => i.el.remove());
     fallingItems = [];
   }
@@ -1201,11 +1223,6 @@ const AnniversaryEngine = (() => {
 
   btnNo.addEventListener('click', e => {
     e.preventDefault();
-    AudioEngine.SFX.boing();
-    placeNoBtn(e.clientX, e.clientY);
-  });
-
-  btnNo.addEventListener('mouseover', e => {
     AudioEngine.SFX.boing();
     placeNoBtn(e.clientX, e.clientY);
   });

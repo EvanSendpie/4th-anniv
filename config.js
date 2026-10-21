@@ -54,7 +54,7 @@ const CONFIG = {
     {
       year: "Tahun 1",
       title: "The Spark",
-      date: "September 2021 – September 2022",
+      date: "Oktober 2022 – September 2023",
       story: "Awal dari segalanya — saat satu sapaan kecil memulai sebuah cerita yang indah. Pertama kali jalan bareng, pertama kali ketawa bareng, dan pertama kali sadar bahwa kamu adalah orang yang aku cari.",
       photo: "",
       memories: [
@@ -66,7 +66,7 @@ const CONFIG = {
     {
       year: "Tahun 2",
       title: "Growing Together",
-      date: "September 2022 – September 2023",
+      date: "Oktober 2023 – September 2024",
       story: "Makin kenal, makin sayang. Belajar saling memahami kebiasaan satu sama lain — dari hal-hal kecil yang bikin ketawa sampai momen-momen yang bikin makin dekat.",
       photo: "",
       memories: [
@@ -78,7 +78,7 @@ const CONFIG = {
     {
       year: "Tahun 3",
       title: "Through Ups & Downs",
-      date: "September 2023 – September 2024",
+      date: "Oktober 2024 – September 2025",
       story: "Bukan selalu mulus, tapi kita selalu saling menguatkan. Terima kasih sudah tetap ada di saat momen tersulit — dan membuatku ingat kenapa kamu selalu jadi pilihan pertamaku.",
       photo: "",
       memories: [
@@ -90,11 +90,11 @@ const CONFIG = {
     {
       year: "Tahun 4",
       title: "Stronger Than Ever",
-      date: "September 2024 – September 2025",
+      date: "Oktober 2025 – Sekarang",
       story: "Empat tahun bersama, dan cinta kita makin kuat dari sebelumnya. Setiap hari bersamamu adalah hadiah — dan aku tidak sabar menjalani tahun-tahun berikutnya bersamamu.",
       photo: "",
       memories: [
-        "4 tahun dan masih sama-sama baper",
+        "4 tahun dan masih sama-sama sayang",
         "Mimpi dan rencana masa depan bersama",
         "Happy 4th Anniversary, sayangku!",
       ]
@@ -115,11 +115,11 @@ const CONFIG = {
       question: "Tanggal berapa kita pertama kali jadian?",
       options: ["27 September", "14 Februari", "23 Oktober", "17 Agustus"],
       answer: 2,
-      explanation: "Yap! 27 September adalah hari paling spesial kita."
+      explanation: "Yap! 23 Oktober adalah hari paling spesial kita."
     },
     {
       question: "Apa hal pertama yang bikin kamu tertarik sama aku?",
-      options: ["Senyumannya yang manis", "Cara dia ketawa", "Orangnya perhatian banget", "Semua hal dari Pudu!"],
+      options: ["Senyumannya yang manis", "Cara Pudu ketawa", "Orangnya perhatian banget", "Semua hal dari Pudu!"],
       answer: 3,
       explanation: "Semuanya sempurna dong! Gimana mau pilih satu??"
     },
@@ -163,7 +163,7 @@ const CONFIG = {
    *                    Each string becomes one paragraph block
    */
   letterParagraphs: [
-    "Sayang yang aku cintai,",
+    "Bubu yang aku cintai,",
     "Empat tahun. Sudah empat tahun kita bersama — dan setiap harinya terasa seperti hadiah yang tidak pernah aku minta, tapi selalu aku syukuri.",
     "Aku masih ingat hari pertama kita. Betapa gugupnya aku, betapa bahagianya aku. Kamu hadir dalam hidupku dan segalanya terasa lebih berwarna. Kamu mengajarkanku apa artinya mencintai dan dicintai dengan tulus.",
     "Terima kasih sudah selalu ada. Di hari-hari bahagia kita rayakan bersama, dan di hari-hari sulit kamu tetap di sana — menjadi tempatku pulang. Kamu adalah rumahku.",

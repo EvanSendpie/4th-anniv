@@ -259,6 +259,7 @@ section {
   z-index: 9000;
   display: grid;
   place-items: center;
+  grid-template-columns: minmax(0, 1fr);
   min-height: 100svh;
   min-height: 100dvh;
   background: var(--hero-surface);
@@ -277,8 +278,8 @@ section {
   background: var(--canvas);
   border-radius: var(--radius-lg);
   padding: clamp(20px, 4vw, 36px);
+  width: min(100%, 400px);
   max-width: 400px;
-  width: 100%;
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
   text-align: center;
@@ -286,6 +287,8 @@ section {
   border: 1px solid var(--hairline);
   position: relative;
   overflow: hidden;
+  justify-self: center;
+  margin: 0 auto;
 }
 
 .gate-card::before {
@@ -347,12 +350,17 @@ section {
 
 /* Gate message */
 .gate-message {
-  min-height: 1.5rem;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: .9rem;
+  line-height: 1.4;
   color: var(--pink-deep);
   margin-bottom: 16px;
   font-weight: 600;
-  transition: opacity .3s;
+  transition: opacity .2s;
+  padding: 0 8px;
 }
 
 /* Keypad */
@@ -576,10 +584,11 @@ section {
   border: 1px solid var(--primary);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
-  font-family: var(--font-main);
-  font-size: 17px;
+  font-family: var(--font-deco);
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.2;
+  letter-spacing: 0.02em;
   text-decoration: none;
   animation: cardSlideUp .6s .6s cubic-bezier(.34,1.56,.64,1) both;
   transition: background-color 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out;
@@ -1209,8 +1218,16 @@ section {
 }
 
 .envelope-wax-seal {
-  font-size: 3.5rem;
-  margin-bottom: 8px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(169, 88, 62, 0.4);
+  margin-bottom: 12px;
   animation: sealPulse 2.5s ease-in-out infinite;
   transition: transform .3s;
 }
@@ -1370,7 +1387,7 @@ section {
 .yes-celebration {
   position: fixed;
   inset: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   height: 100dvh;
   z-index: 99999;
