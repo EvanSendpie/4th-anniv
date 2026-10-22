@@ -28,7 +28,7 @@ const CONFIG = {
    * hint      → A sweet clue shown when she clicks the hint button
    */
   passcode: "231022",
-  hint: "Coba ingat tanggal spesial kita pertama kali jadian ya.",
+  hint: "Tanggal pertama kali kita resmi jadian.",
 
   /* ──────────────────────────────────────────
    *  SECTION 3 · Anniversary Start Date
@@ -48,55 +48,55 @@ const CONFIG = {
    *   story      → Short paragraph describing that year
    *   photo      → Path/URL to your photo for that year
    *                Use "" or "assets/placeholder.jpg" while testing
-   *   memories   → Array of short bullet memory strings (2–4 items)
+   *   memories   → Array of short bullet memory strings (2-4 items)
    */
   storyline: [
     {
       year: "Tahun 1",
       title: "The Spark",
-      date: "Oktober 2022 – September 2023",
-      story: "Awal dari segalanya — saat satu sapaan kecil memulai sebuah cerita yang indah. Pertama kali jalan bareng, pertama kali ketawa bareng, dan pertama kali sadar bahwa kamu adalah orang yang aku cari.",
-      photo: "",
+      date: "Oktober 2022 - September 2023",
+      story: "Semuanya berawal dari obrolan canggung yang pelan-pelan jadi percakapan favorit tiap malam. Masih ingat jelas rasanya deg-degan waktu pertama kali jalan bareng dan canggung pas mau gandeng tangan, sampai akhirnya sadar kalau aku betah banget berlama-lama sama kamu.",
+      photo: "/assets/timeline-photos/year1.webp",
       memories: [
-        "Kencan pertama yang bikin deg-degan",
-        "Pertama kali pegang tangan",
-        "Foto berdua untuk pertama kali",
+        "Obrolan random pertama di gedung bangki yang gak expect bisa lama.",
+        "Pudu confess + nembak Bubu ",
+        "Foto pertama berdua yang hasilnya masih kaku",
       ]
     },
     {
       year: "Tahun 2",
       title: "Growing Together",
-      date: "Oktober 2023 – September 2024",
-      story: "Makin kenal, makin sayang. Belajar saling memahami kebiasaan satu sama lain — dari hal-hal kecil yang bikin ketawa sampai momen-momen yang bikin makin dekat.",
-      photo: "",
+      date: "Oktober 2023 - September 2024",
+      story: "Tahun kedua kita mulai hafal kebiasaan masing-masing, dari menu makanan favorit sampai ekspresi kalau lagi ngambek. Kita juga ada mulai LDR ketika aku kuliah. Kita sering teleponan sampai ketiduran, explore kesana kemari berdua, dan mulai sadar kalau kamu bukan cuma pasangan, tapi juga teman cerita paling nyaman.",
+      photo: "/assets/timeline-photos/year2.webp",
       memories: [
-        "Jalan-jalan seru bareng pertama kali",
-        "Ngobrol sampai pagi ga kerasa",
-        "Punya playlist lagu favorit berdua",
+        "Trip bareng ke Magelang yang seru",
+        "Teleponan malam sampai lupa waktu",
+        "Walau LDR masih bisa onlien dating",
       ]
     },
     {
       year: "Tahun 3",
       title: "Through Ups & Downs",
-      date: "Oktober 2024 – September 2025",
-      story: "Bukan selalu mulus, tapi kita selalu saling menguatkan. Terima kasih sudah tetap ada di saat momen tersulit — dan membuatku ingat kenapa kamu selalu jadi pilihan pertamaku.",
-      photo: "",
+      date: "Oktober 2024 - September 2025",
+      story: "Nggak ada perjalanan yang mulus terus, tahun ketiga mengajarkan kita banyak hal tentang sabar dan menurunkan ego. Ada hari-hari capek saat kita berbeda pendapat, tapi kita selalu memilih untuk duduk bersama, mendengarkan, dan saling menguatkan lagi.",
+      photo: "/assets/timeline-photos/year3.webp",
       memories: [
-        "Saling support di masa-masa sulit",
-        "Belajar komunikasi lebih baik",
-        "Buktikan bahwa cinta itu bisa melewati badai",
+        "Belajar memahami sudut pandang masing-masing",
+        "Saling menemani di hari-hari yang melelahkan",
+        "Makin yakin untuk terus melangkah berdua",
       ]
     },
     {
       year: "Tahun 4",
       title: "Stronger Than Ever",
-      date: "Oktober 2025 – Sekarang",
-      story: "Empat tahun bersama, dan cinta kita makin kuat dari sebelumnya. Setiap hari bersamamu adalah hadiah — dan aku tidak sabar menjalani tahun-tahun berikutnya bersamamu.",
-      photo: "",
+      date: "Oktober 2025 - Sekarang",
+      story: "Empat tahun berlalu, rasa sayangnya nggak berkurang sama sekali, hanya terasa jauh lebih tenang dan matang. Kita sudah paham ritme satu sama lain, tahu cara saling menenangkan, dan makin mantap menatap masa depan berdua.",
+      photo: "/assets/timeline-photos/year4.webp",
       memories: [
-        "4 tahun dan masih sama-sama sayang",
-        "Mimpi dan rencana masa depan bersama",
-        "Happy 4th Anniversary, sayangku!",
+        "Genap empat tahun saling menemani",
+        "Saling support dan saling berkembang",
+        "Selamat empat tahun bersama, Bubu",
       ]
     }
   ],
@@ -110,30 +110,54 @@ const CONFIG = {
    *   answer      → Index (0-based) of the correct option
    *   explanation → Fun explanation shown after answering
    */
+  /*
+   * Album Kenangan
+   * Ganti setiap path dengan path foto milikmu, contoh:
+   * "/assets/album/foto-01.webp"
+   */
+  albumPhotos: [
+    "/assets/timeline-photos/year1.webp",
+    "/assets/timeline-photos/year2.webp",
+    "/assets/timeline-photos/year3.webp",
+    "/assets/timeline-photos/year4.webp",
+    "/assets/timeline-photos/year1.webp",
+    "/assets/timeline-photos/year2.webp",
+    "/assets/timeline-photos/year3.webp",
+    "/assets/timeline-photos/year4.webp",
+    "/assets/timeline-photos/year1.webp",
+    "/assets/timeline-photos/year2.webp",
+    "/assets/timeline-photos/year3.webp",
+    "/assets/timeline-photos/year4.webp",
+    "/assets/timeline-photos/year1.webp",
+    "/assets/timeline-photos/year2.webp",
+    "/assets/timeline-photos/year3.webp",
+    "/assets/timeline-photos/year4.webp"
+  ],
+
   quizQuestions: [
     {
       question: "Tanggal berapa kita pertama kali jadian?",
       options: ["27 September", "14 Februari", "23 Oktober", "17 Agustus"],
       answer: 2,
-      explanation: "Yap! 23 Oktober adalah hari paling spesial kita."
+      explanation: "Tepat, 23 Oktober adalah tanggal awal perjalanan kita berdua."
     },
     {
       question: "Apa hal pertama yang bikin kamu tertarik sama aku?",
-      options: ["Senyumannya yang manis", "Cara Pudu ketawa", "Orangnya perhatian banget", "Semua hal dari Pudu!"],
+      options: ["Senyum manisnya", "Cara Pudu ketawa", "Perhatiannya yang tulus", "Semua hal tentang Pudu"],
       answer: 3,
-      explanation: "Semuanya sempurna dong! Gimana mau pilih satu??"
+      explanation: "Nggak ada yang terlewat, semuanya langsung bikin jatuh hati."
     },
     {
       question: "Kalau lagi kangen, aku biasanya...",
-      options: ["Langsung chat", "Lihat foto-foto kita", "Telpon Pudu", "Semua di atas!"],
+      options: ["Langsung kirim chat", "Buka galeri foto kita", "Telepon Pudu", "Semua hal di atas"],
       answer: 3,
-      explanation: "Kangen itu nyata dan tidak bisa ditahan."
+      explanation: "Kalau sudah kangen, segala cara dicoba biar bisa dengar kabar kamu."
     },
     {
       question: "Sudah berapa tahun kita bersama?",
       options: ["2 tahun", "3 tahun", "4 tahun", "5 tahun"],
       answer: 2,
-      explanation: "4 tahun! Dan semoga masih banyak tahun-tahun indah ke depan~ "
+      explanation: "Genap empat tahun, dan masih banyak cerita yang bakal kita jalani ke depan."
     }
   ],
 
@@ -144,17 +168,22 @@ const CONFIG = {
    * gameDuration → Seconds the game runs (0 = unlimited until win)
    */
   heartGame: {
-    targetScore: 15,
+    targetScore: 23,
     gameDuration: 0
   },
 
   /* ──────────────────────────────────────────
    *  SECTION 7 · Love Photo Puzzle
    * ──────────────────────────────────────────
-   * puzzleImage  → Path/URL to the couple photo used for the puzzle
-   *                Use "" to use the built-in numbered fallback puzzle
+   * puzzleImages → Array of photo paths; a random photo is selected each round
    */
-  puzzleImage: "",
+  /* Tambahkan beberapa path foto; satu dipilih acak untuk setiap ronde. */
+  puzzleImages: [
+    "assets/puzzle/puzzle1.webp",
+    "assets/puzzle/puzzle2.webp",
+    "assets/puzzle/puzzle3.webp",
+    "assets/puzzle/puzzle4.webp"
+  ],
 
   /* ──────────────────────────────────────────
    *  SECTION 8 · The Love Letter
@@ -163,12 +192,11 @@ const CONFIG = {
    *                    Each string becomes one paragraph block
    */
   letterParagraphs: [
-    "Bubu yang aku cintai,",
-    "Empat tahun. Sudah empat tahun kita bersama — dan setiap harinya terasa seperti hadiah yang tidak pernah aku minta, tapi selalu aku syukuri.",
-    "Aku masih ingat hari pertama kita. Betapa gugupnya aku, betapa bahagianya aku. Kamu hadir dalam hidupku dan segalanya terasa lebih berwarna. Kamu mengajarkanku apa artinya mencintai dan dicintai dengan tulus.",
-    "Terima kasih sudah selalu ada. Di hari-hari bahagia kita rayakan bersama, dan di hari-hari sulit kamu tetap di sana — menjadi tempatku pulang. Kamu adalah rumahku.",
-    "Empat tahun bukan waktu yang sebentar. Tapi bersamamu, setiap momen terasa berharga. Dan aku tidak bisa membayangkan menjalani hidup ini tanpa kamu di sisi ku.",
-    "Selamat anniversary ke-4, cintaku. Semoga kita terus tumbuh bersama, saling mendukung, dan selalu bahagia. Aku mencintaimu lebih dari yang bisa aku ungkapkan dengan kata-kata.",
+    "Buat Bubu,",
+    "Nggak terasa kita sudah jalan bareng selama empat tahun. Kalau diingat lagi, rasanya belum lama kita canggung ngobrol pertama kali di bangki itu, dan sekarang kamu sudah jadi orang pertama yang aku cari setiap kali ada kabar baik atau hari yang melelahkan.",
+    "Banyak hal yang berubah selama empat tahun ini, tapi caraku memandangmu tetap sama. Aku selalu kagum pada caramu tersenyum, keanggunan dan kesopananmu, dan perhatian kecil yang selalu kamu berikan tanpa perlu diminta.",
+    "Kita pernah tertawa sampai perut sakit, pernah juga berbeda pendapat sampai sama-sama diam (silent treatment ah). Terus yang paling aku syukuri, di penghujung hari kita selalu memilih untuk saling mendengar dan memperbaiki segalanya bersama (karena aku yang minta juga hehe).",
+    "Terima kasih sudah bertahan, menemani, dan tumbuh bersamaku sejauh ini. Selamat hari jadi yang keempat sayang, aku bersyukur punya kamu dalam hidupku.",
   ],
 
   /* ──────────────────────────────────────────
@@ -178,7 +206,7 @@ const CONFIG = {
    *          Leave "" to use no external BGM (synthesized audio still works)
    *          Example: "assets/our-song.mp3"
    */
-  bgmUrl: "",
+  bgmUrl: "assets/audio/The Marías - Cariño.mp3",
 
 };
 

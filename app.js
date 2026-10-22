@@ -10,7 +10,7 @@
 import CONFIG from './config.js';
 
 /* ═══════════════════════════════════════════════════════════════
-   AUDIO ENGINE — synthesised SFX via Web Audio API + BGM
+   AUDIO ENGINE · synthesised SFX via Web Audio API + BGM
    ═══════════════════════════════════════════════════════════════ */
 const AudioEngine = (() => {
   let ctx = null;
@@ -141,7 +141,7 @@ const AudioEngine = (() => {
     if (!CONFIG.bgmUrl || bgm) return;
     bgm = new Audio(CONFIG.bgmUrl);
     bgm.loop = true;
-    bgm.volume = 0.35;
+    bgm.volume = 0.2;
   }
 
   function setMusicUIHandler(handler) {
@@ -282,7 +282,7 @@ const ConfettiEngine = (() => {
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   ANNIVERSARY ENGINE — Primary Seam
+   ANNIVERSARY ENGINE · Primary Seam
    All state and transitions; no DOM coupling.
    ═══════════════════════════════════════════════════════════════ */
 const AnniversaryEngine = (() => {
@@ -466,7 +466,7 @@ const AnniversaryEngine = (() => {
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   DOM WIRING — SECTION 1: PASSCODE GATE
+   DOM WIRING · SECTION 1: PASSCODE GATE
    ═══════════════════════════════════════════════════════════════ */
 (function initGate() {
   const gateSection   = document.getElementById('section-passcode');
@@ -538,13 +538,13 @@ const AnniversaryEngine = (() => {
       showMessage('');
     } else if (result.action === 'unlock') {
       updateDots(PASSCODE_LENGTH);
-      showMessage(`Benar ${CONFIG.partnerName}! Selamat datang`);
+      showMessage(`Kodenya cocok. Selamat datang, ${CONFIG.partnerName}`);
       setTimeout(unlock, 400);
     } else if (result.action === 'wrong') {
       AudioEngine.SFX.wrong();
       updateDots(0);
       shakePin();
-      showMessage('Tetot, salah!', true);
+      showMessage('Kodenya belum pas, coba lagi', true);
     }
   }
 
@@ -664,7 +664,7 @@ const AnniversaryEngine = (() => {
     if (chapter.photo) {
       photoHTML = `<div class="chapter-photo"><img src="${chapter.photo}" alt="Kenangan ${chapter.year}" loading="lazy"/></div>`;
     } else {
-      photoHTML = `<div class="chapter-photo"><div class="photo-placeholder">Foto kenangan ${chapter.year} akan muncul di sini.<br/><small>Tambahkan path foto di config.js.</small></div></div>`;
+      photoHTML = `<div class="chapter-photo"><div class="photo-placeholder">Foto kenangan ${chapter.year} akan muncul di sini.<br/><small>Tambahkan file foto di config.js</small></div></div>`;
     }
 
     const memoriesHTML = chapter.memories
@@ -754,6 +754,7 @@ const AnniversaryEngine = (() => {
   const progressText = document.getElementById('quiz-progress-text');
   const completeEl   = document.getElementById('quiz-complete');
   const scoreText    = document.getElementById('quiz-score-text');
+  const albumSection = document.getElementById('section-album');
 
   function renderQuestion() {
     const q = AnniversaryEngine.getQuizQuestion();
@@ -806,9 +807,12 @@ const AnniversaryEngine = (() => {
     if (result.action === 'complete') {
       quizCard.classList.add('hidden');
       completeEl.classList.remove('hidden');
+      albumSection.classList.remove('hidden');
       const total = result.total;
       const score = result.score;
-      scoreText.textContent = `Skor kamu: ${score} / ${total}`;
+      scoreText.textContent = score === total
+        ? `Skor: ${score}/${total}, ingatanmu juara.`
+        : `Skor: ${score}/${total}.`;
       AudioEngine.SFX.victory();
       ConfettiEngine.burst();
     } else {
@@ -817,6 +821,54 @@ const AnniversaryEngine = (() => {
   });
 
   renderQuestion();
+})();
+
+/* Photo album lightbox */
+(function initAlbum() {
+  const lightbox = document.getElementById('album-lightbox');
+  const lightboxImage = document.getElementById('album-lightbox-image');
+  const albumGrid = document.getElementById('album-grid');
+  let lastTrigger = null;
+
+  CONFIG.albumPhotos.forEach((src, index) => {
+    const photo = document.createElement('button');
+    const image = document.createElement('img');
+    const number = document.createElement('span');
+    const photoNumber = String(index + 1).padStart(2, '0');
+
+    photo.className = 'album-photo';
+    photo.type = 'button';
+    photo.dataset.photo = src;
+    photo.setAttribute('aria-label', `Perbesar foto kenangan ${index + 1}`);
+    image.src = src;
+    image.alt = `Foto kenangan ${index + 1}`;
+    image.width = 1280;
+    image.height = 960;
+    image.loading = 'lazy';
+    number.textContent = photoNumber;
+    photo.append(image, number);
+    albumGrid.appendChild(photo);
+
+    photo.addEventListener('click', () => {
+      lastTrigger = photo;
+      lightboxImage.src = src;
+      lightboxImage.alt = image.alt;
+      lightbox.classList.remove('hidden');
+      lightbox.focus();
+    });
+  });
+
+  function closeLightbox() {
+    if (lightbox.classList.contains('hidden')) return;
+    lightbox.classList.add('hidden');
+    lightboxImage.removeAttribute('src');
+    lastTrigger?.focus();
+  }
+
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeLightbox();
+  });
 })();
 
 /* ═══════════════════════════════════════════════════════════════
@@ -989,33 +1041,57 @@ const AnniversaryEngine = (() => {
   let tiles = [0,1,2,3,4,5,6,7,8];
   let gameStarted = false;
 
-  const IMG = CONFIG.puzzleImage;
+  const puzzleImages = CONFIG.puzzleImages ?? [];
+  let IMG = puzzleImages[Math.floor(Math.random() * puzzleImages.length)] ?? '';
   const GRID = 3;
   const PASTEL_COLORS = ['#efe9de','#faf9f5','#cc785c','#a9583e','#6c6a64','#2f7d32'];
   let imageReady = false;
 
   function renderPreview() {
     if (imageReady) {
-      preview.innerHTML = `<img src="${IMG}" alt="Preview foto puzzle" style="width:100%;height:100%;object-fit:cover;"/>`;
+      const image = document.createElement('img');
+      image.src = IMG;
+      image.alt = 'Preview foto puzzle';
+      preview.replaceChildren(image);
     } else {
       preview.innerHTML = '<div class="puzzle-fallback-preview"><strong>Kenangan</strong><small>Tambahkan foto di config.js</small></div>';
     }
   }
 
-  if (IMG) {
+  function setPuzzleImage(src) {
+    IMG = src;
+    imageReady = false;
+    renderPreview();
+
+    if (!IMG) {
+      renderBoard();
+      return;
+    }
+
     const image = new Image();
     image.addEventListener('load', () => {
+      if (IMG !== src) return;
       imageReady = true;
       renderPreview();
       renderBoard();
     });
     image.addEventListener('error', () => {
+      if (IMG !== src) return;
       imageReady = false;
       renderPreview();
       renderBoard();
     });
     image.src = IMG;
   }
+
+  function getNextPuzzleImage() {
+    if (puzzleImages.length < 2) return puzzleImages[0] ?? '';
+    const otherImages = puzzleImages.filter((image) => image !== IMG);
+    const options = otherImages.length ? otherImages : puzzleImages;
+    return options[Math.floor(Math.random() * options.length)];
+  }
+
+  setPuzzleImage(IMG);
   renderPreview();
 
   function renderBoard() {
@@ -1072,6 +1148,7 @@ const AnniversaryEngine = (() => {
   }
 
   startBtn.addEventListener('click', () => {
+    setPuzzleImage(getNextPuzzleImage());
     tiles = AnniversaryEngine.generateSolvablePuzzle();
     gameStarted = true;
     startBtn.classList.add('hidden');
@@ -1082,6 +1159,7 @@ const AnniversaryEngine = (() => {
   });
 
   resetBtn.addEventListener('click', () => {
+    setPuzzleImage(getNextPuzzleImage());
     tiles = AnniversaryEngine.generateSolvablePuzzle();
     victoryEl.classList.add('hidden');
     gameStarted = true;
@@ -1100,7 +1178,7 @@ const AnniversaryEngine = (() => {
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   SECTION 7: GRAND FINALE — LOVE LETTER & PROPOSAL
+   SECTION 7: GRAND FINALE · LOVE LETTER & PROPOSAL
    ═══════════════════════════════════════════════════════════════ */
 (function initFinale() {
   const envelope        = document.getElementById('envelope');
@@ -1135,7 +1213,7 @@ const AnniversaryEngine = (() => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
   });
 
-  // "No" button evasion — starts in flow, dodges on interaction
+  // "No" button evasion: starts in flow, dodges on interaction
   let noPlaced = false;
 
   function getYesRect() {
@@ -1230,7 +1308,7 @@ const AnniversaryEngine = (() => {
   // "Yes" button
   btnYes.addEventListener('click', () => {
     celebration.classList.remove('hidden');
-    celebMsg.textContent = `Terima kasih sudah memilihku juga, ${CONFIG.partnerName}. Aku mencintaimu selamanya.`;
+    celebMsg.textContent = `Terima kasih sudah memilih untuk terus jalan bareng aku, ${CONFIG.partnerName}. Mari buat cerita baru lagi.`;
     AudioEngine.SFX.celebration();
     ConfettiEngine.burst(null, null, 200);
     setTimeout(() => ConfettiEngine.burst(null, null, 150), 600);
