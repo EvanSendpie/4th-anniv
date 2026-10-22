@@ -72,7 +72,7 @@ const CONFIG = {
       memories: [
         "Trip bareng ke Magelang yang seru",
         "Teleponan malam sampai lupa waktu",
-        "Walau LDR masih bisa onlien dating",
+        "Walau LDR masih bisa online dating",
       ]
     },
     {
@@ -116,22 +116,22 @@ const CONFIG = {
    * "/assets/album/foto-01.webp"
    */
   albumPhotos: [
-    "/assets/timeline-photos/year1.webp",
-    "/assets/timeline-photos/year2.webp",
-    "/assets/timeline-photos/year3.webp",
-    "/assets/timeline-photos/year4.webp",
-    "/assets/timeline-photos/year1.webp",
-    "/assets/timeline-photos/year2.webp",
-    "/assets/timeline-photos/year3.webp",
-    "/assets/timeline-photos/year4.webp",
-    "/assets/timeline-photos/year1.webp",
-    "/assets/timeline-photos/year2.webp",
-    "/assets/timeline-photos/year3.webp",
-    "/assets/timeline-photos/year4.webp",
-    "/assets/timeline-photos/year1.webp",
-    "/assets/timeline-photos/year2.webp",
-    "/assets/timeline-photos/year3.webp",
-    "/assets/timeline-photos/year4.webp"
+    "/assets/album/album1.jpeg",
+    "/assets/album/album2.jpeg",
+    "/assets/album/album3.jpeg",
+    "/assets/album/album4.jpeg",
+    "/assets/album/album5.jpeg",
+    "/assets/album/album6.jpeg",
+    "/assets/album/album7.jpeg",
+    "/assets/album/album8.jpeg",
+    "/assets/album/album9.jpeg",
+    "/assets/album/album10.jpeg",
+    "/assets/album/album11.jpeg",
+    "/assets/album/album12.jpeg",
+    "/assets/album/album13.jpeg",
+    "/assets/album/album14.jpeg",
+    "/assets/album/album15.jpeg",
+    "/assets/album/album16.jpeg"
   ],
 
   quizQuestions: [
